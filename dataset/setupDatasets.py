@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 def produzir(dataset):
-    sub_pasta = f"datasets/UCI_original/UCI HAR Dataset/{dataset}/"
+    sub_pasta = f"UCI/UCI HAR Dataset/{dataset}/"
     pasta = sub_pasta+"Inertial Signals/"
     arquivos = (f"body_acc_x_{dataset}.txt", f"body_acc_y_{dataset}.txt", f"body_acc_z_{dataset}.txt", f"body_gyro_x_{dataset}.txt", f"body_gyro_y_{dataset}.txt", f"body_gyro_z_{dataset}.txt", f"total_acc_x_{dataset}.txt", f"total_acc_y_{dataset}.txt", f"total_acc_z_{dataset}.txt")
     vetores = []
@@ -25,9 +25,9 @@ def produzir(dataset):
     y = y.reshape(-1, 1)
     vetores = np.concatenate((vetores, y), axis=1)
     
-    # slvar vetores como train.csv
+    # salvar vetores como train.csv
     df = pd.DataFrame(vetores)
-    df.to_csv(f"datasets/UCI_original/{dataset}.csv", index=False, header=False)
+    df.to_csv(f"UCI/{dataset}.csv", index=False, header=False)
 
 produzir("train")
 produzir("test")
