@@ -32,7 +32,9 @@ class TFC_Model(pl.LightningModule):
         else:
             self.transform = TFC_Transforms()
     
-    def forward(self, x_t, x_f, all=False):
+    def forward(self, x_t, x_f = None, all=False):
+        if x_f is None:
+            x_f = fft.fft(x_t).abs()
         h_t, z_t, h_f, z_f = self.backbone(x_t, x_f)
         if self.pred_head:
             fea_concat = torch.cat((z_t, z_f), dim=1)
